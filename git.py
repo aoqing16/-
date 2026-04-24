@@ -25,4 +25,3 @@ def git_push_automation(commit_message="auto update"):
 
 if __name__ == "__main__":
     git_push_automation("更新订阅数据")
-git_push_automation(dfj)
