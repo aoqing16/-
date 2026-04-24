@@ -1,9 +1,27 @@
+import subprocess
 import os
 
-repo_path = r"C:\Users\ZhuanZ1\Desktop\多平台信息订阅"
 
-os.chdir(repo_path)
+def git_push_automation(commit_message="auto update"):
+    # 确保在正确的项目路径下
+    project_path = r"C:\Users\ZhuanZ1\Desktop\多平台信息订阅"
+    os.chdir(project_path)
 
-os.system("git add .")
-os.system('git commit -m "auto update"')
-os.system("git push")
+    try:
+        # 1. 添加所有更改
+        subprocess.run(["git", "add", "."], check=True)
+
+        # 2. 提交更改
+        subprocess.run(["git", "commit", "-m", commit_message], check=True)
+
+        # 3. 推送到远程仓库
+        # 这里建议先 pull 一下防止冲突，或者直接 push
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+
+        print("🚀 推送成功！")
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Git 操作失败: {e}")
+
+
+if __name__ == "__main__":
+    git_push_automation("更新订阅数据")

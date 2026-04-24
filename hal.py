@@ -13,12 +13,12 @@ def write_card_to_html(img_path, title, link):
     """
 
     # 读取并替换
-    with open('C:/Users/ZhuanZ1/Desktop/多平台信息订阅/cehsi.html', 'r', encoding='utf-8') as f:
+    with open('/index.html', 'r', encoding='utf-8') as f:
         content = f.read()
 
     # 将新卡片插入到锚点之前，并保留锚点以便下次继续插入
     new_content = content.replace('<!--唯一标识符-->', f'{new_card}\n<!--唯一标识符-->')
 
-    with open('C:/Users/ZhuanZ1/Desktop/多平台信息订阅/cehsi.html', 'w', encoding='utf-8') as f:
+    with open('/index.html', 'w', encoding='utf-8') as f:
         f.write(new_content)
 # write_card_to_html("path/to/pic.jpg", "我是动态写入的标题", "https://xxx.com")
