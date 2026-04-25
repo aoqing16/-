@@ -1,6 +1,4 @@
-{
-    "檀东东": 14739873,
-    "AIGCLINK": 471000665,
-    "AI老X": 5758057,
-    "哩布哩布AI": 482619845
-}
+一口新飯:@MoneyXYZ
+小lin说：@xiao_lin_shuo
+LEI：@TheMarketMemo
+AI探索与发现：@AIDiscovery2045
