@@ -48,6 +48,7 @@
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;JavaScript 调试.cehsi.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript 调试.index.html.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;Python.git.executor&quot;: &quot;Run&quot;,
     &quot;Python.hal.executor&quot;: &quot;Run&quot;,
@@ -79,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777011462479</updated>
-      <workItem from="1777011463485" duration="32300000" />
+      <workItem from="1777011463485" duration="33284000" />
     </task>
     <servers />
   </component>
