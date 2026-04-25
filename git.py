@@ -9,7 +9,7 @@ def git_push_automation(commit_message="auto update"):
 
     try:
         # 1. 添加所有更改
-        subprocess.run(("git", "add", "."), check=True)#这里的列表看起来像是为了拼接字符串呢？我感觉实现的效果其实就是打出git add .但是为什么要用中括号装起来呢？
+        subprocess.run(("git", "add", "."), check=True)#这里的列表看起来像是为了拼接字符串呢？我感觉实现的效果其实就是打出git add .但是为什么要用中括号装起来呢？,第一串是添加到暂存区，第二串是加到本地仓库，第三串是提交远程仓库
 
         # 2. 提交更改
         subprocess.run(["git", "commit", "-m", commit_message], check=True)
@@ -21,7 +21,3 @@ def git_push_automation(commit_message="auto update"):
         print("🚀 推送成功！")
     except subprocess.CalledProcessError as e:
         print(f"❌ Git 操作失败: {e}")
-
-
-if __name__ == "__main__":
-    git_push_automation("更新订阅数据")
