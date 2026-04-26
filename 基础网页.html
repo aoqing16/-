@@ -15,46 +15,57 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f4f7;
+            background: linear-gradient(180deg, #f7f8fc 0%, #eef1f7 100%);
             line-height: 1.6;
-            color: #333;
+            color: #2f3440;
         }
 
         .container {
             display: flex;
             flex-direction: column; /* 核心：自上而下排列 */
-            gap: 20px; /* 区域间的间距 */
-            padding: 20px;
-            max-width: 1200px;
+            gap: 24px; /* 区域间的间距 */
+            padding: 28px 20px 36px;
+            max-width: 1240px;
             margin: 0 auto;
         }
 
         /* 通用区域样式 */
         .content-section {
             width: 100%;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background: #ffffffcc;
+            backdrop-filter: blur(6px);
+            border-radius: 16px;
+            border: 1px solid #e5e9f2;
+            box-shadow: 0 16px 36px rgba(31, 41, 55, 0.08);
             overflow: hidden;
             height: auto; /* 核心：高度随内容动态变化 */
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .content-section:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(31, 41, 55, 0.12);
         }
 
         .header {
-            padding: 15px 25px;
-            border-bottom: 1px solid #eee;
+            padding: 16px 24px;
+            border-bottom: 1px solid #edf1f7;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
         }
 
         .header h2 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
         }
 
         .content {
-            padding: 25px;
+            padding: 22px 24px 26px;
+        }
+
+        .content p {
+            color: #5b6475;
+            font-size: 0.96rem;
         }
 
         /* 占位元素：模拟内容填充 */
@@ -94,6 +105,110 @@
         #x-platform h2 {
             color: #0f1419;
         }
+
+        #bilibili .video-grid {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        #bilibili .video-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(251, 114, 153, 0.12);
+            border: 1px solid #f3d9e2;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #bilibili .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 24px rgba(251, 114, 153, 0.18);
+        }
+
+        #bilibili .video-card iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: 0;
+        }
+
+        #bilibili .video-title {
+            padding: 10px 12px;
+            border-top: 1px solid #f3d9e2;
+            font-size: 0.95rem;
+            color: #3b4252;
+            font-weight: 600;
+            line-height: 1.4;
+            background: #fffafb;
+        }
+
+        #youtube .video-grid {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        #youtube .video-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.1);
+            border: 1px solid #f5d7d7;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #youtube .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 24px rgba(255, 0, 0, 0.16);
+        }
+
+        #youtube .video-card iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: 0;
+        }
+
+        #x-platform .tweet-grid {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        #x-platform .tweet-card {
+            background: #fff;
+            border-radius: 14px;
+            border: 1px solid #e6e8eb;
+            box-shadow: 0 8px 20px rgba(15, 20, 25, 0.08);
+            overflow: hidden;
+            padding: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #x-platform .tweet-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 26px rgba(15, 20, 25, 0.12);
+        }
+
+        #x-platform .tweet-card .twitter-tweet {
+            margin: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 18px 12px 26px;
+            }
+
+            .header,
+            .content {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -105,19 +220,35 @@
         </div>
         <div class="content">
             <p>这里是 Bilibili 的内容区域。高度会随着这里文字或图片的增加而自动向下延伸。</p>
-            <div class="placeholder-box"><!--起始点-->
-
-                <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1jfofBTEYJ&autoplay=0"
+            <div class="video-grid"><!--起始点-->
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1jfofBTEYJ&autoplay=0"
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">视频标题：Bilibili 内容 1</div>
+                </div>
 
-                <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1RnoPBCEH9&autoplay=0"
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1RnoPBCEH9&autoplay=0"
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">视频标题：Bilibili 内容 2</div>
+                </div>
 
-                <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV15k9jBTEKw&autoplay=0"
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV15k9jBTEKw&autoplay=0"
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">视频标题：Bilibili 内容 3</div>
+                </div>
 
-                <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Vb9gBQE7L&autoplay=0"
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Vb9gBQE7L&autoplay=0"
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">视频标题：Bilibili 内容 4</div>
+                </div>
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Vb9gBQE7L&autoplay=0"
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">视频标题：Bilibili 内容 5</div>
+                </div>
 <!--哔哩哔哩内容标识符-->
             </div>
         </div>
@@ -129,28 +260,34 @@
         </div>
         <div class="content">
             <p>YouTube 区域。采用自然排列，适合放置视频卡片或订阅列表。</p>
-            <div class="placeholder-box">YouTube 视频组件占位<!--起始点-->
+            <div class="video-grid"><!--起始点-->
+                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WbErZdXojow"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
 
+                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/TxWErg5JBpk"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
 
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/WbErZdXojow"
-                     title="YouTube video player" frameborder="0"
-                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/tNzUUET5opY"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
 
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/TxWErg5JBpk"
-                     title="YouTube video player" frameborder="0"
-                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/tNzUUET5opY"
-                     title="YouTube video player" frameborder="0"
-                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/vXstCbV5J8w"
-                     title="YouTube video player" frameborder="0"
-                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/vXstCbV5J8w"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
 <!--YouTube内容标识符-->
             </div>
         </div>
@@ -162,29 +299,32 @@
         </div>
         <div class="content">
             <p>最新的推文信息流。由于设置了高度自适应，当推文增多时，页面会自动变长。</p>
-            <div class="placeholder-box">推文信息流占位<!--起始点-->
-<blockquote class="twitter-tweet"><p lang="zxx" dir="ltr"><a href="https://t.co/ip9kyn2Trk">https://t.co/ip9kyn2Trk</a></p>&mdash; 歸藏(guizang.ai) (@op7418) <a href="https://twitter.com/op7418/status/2047486546300051478?ref_src=twsrc%5Etfw">April 24, 2026</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <div class="tweet-grid"><!--起始点-->
+                <div class="tweet-card">
+                    <blockquote class="twitter-tweet"><p lang="zxx" dir="ltr"><a href="https://t.co/ip9kyn2Trk">https://t.co/ip9kyn2Trk</a></p>&mdash; 歸藏(guizang.ai) (@op7418) <a href="https://twitter.com/op7418/status/2047486546300051478?ref_src=twsrc%5Etfw">April 24, 2026</a></blockquote>
+                </div>
 
+                <div class="tweet-card">
+                    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">A thread for my nana banana pro prompts 🧵 <a href="https://t.co/riAcKUtR6T">pic.twitter.com/riAcKUtR6T</a></p>&mdash; 宝玉 (@dotey) <a href="https://twitter.com/dotey/status/1996285439867556304?ref_src=twsrc%5Etfw">December 3, 2025</a></blockquote>
+                </div>
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A thread for my nana banana pro prompts 🧵 <a href="https://t.co/riAcKUtR6T">pic.twitter.com/riAcKUtR6T</a></p>&mdash; 宝玉 (@dotey) <a href="https://twitter.com/dotey/status/1996285439867556304?ref_src=twsrc%5Etfw">December 3, 2025</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="tweet-card">
+                    <blockquote class="twitter-tweet"><p lang="zh" dir="ltr">我的第一本书，终于出版了。<br><br>书名叫「重构个体：AI 时代如何打造个人竞争力」，电子工业出版社。<br><br>我年轻的时候读过的技术书，很多都出自电子工业出版社。没想到有一天，自己写的书也能由他们出版。… <a href="https://t.co/Of91PdhKon">pic.twitter.com/Of91PdhKon</a></p>&mdash; Axton (@AxtonLiu) <a href="https://twitter.com/AxtonLiu/status/2037138223361909084?ref_src=twsrc%5Etfw">March 26, 2026</a></blockquote>
+                </div>
 
+                <div class="tweet-card">
+                    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I couldn’t code 18 months ago.<br><br>Yesterday I raised over $20,000 from initial customers to get my software business off the ground.<br><br>Believe in yourself, be relentlessly resourceful, be relentlessly optimistic, and never give up.</p>&mdash; Mckay Wrigley (@mckaywrigley) <a href="https://twitter.com/mckaywrigley/status/1286663173861408770?ref_src=twsrc%5Etfw">July 24, 2020</a></blockquote>
+                </div>
 
-<blockquote class="twitter-tweet"><p lang="zh" dir="ltr">我的第一本书，终于出版了。<br><br>书名叫「重构个体：AI 时代如何打造个人竞争力」，电子工业出版社。<br><br>我年轻的时候读过的技术书，很多都出自电子工业出版社。没想到有一天，自己写的书也能由他们出版。… <a href="https://t.co/Of91PdhKon">pic.twitter.com/Of91PdhKon</a></p>&mdash; Axton (@AxtonLiu) <a href="https://twitter.com/AxtonLiu/status/2037138223361909084?ref_src=twsrc%5Etfw">March 26, 2026</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="tweet-card">
+                    <blockquote class="twitter-tweet"><p lang="zh" dir="ltr">阿里通义实验室最新发布了款ASR：Fun-ASR 1.5，核心能力：方言工业级可用<br><br>单模型即可无缝覆盖30种语言、汉语七大方言体系及20+ 地方口音，古诗词吟诵也能精准转写<br><br>典型方言场景CER相对上代下降56.2%，有5种方言准确率破 90%，15种超过 80%… <a href="https://t.co/1V6B1EPX8l">pic.twitter.com/1V6B1EPX8l</a></p>&mdash; AIGCLINK (@aigclink) <a href="https://twitter.com/aigclink/status/2046149914678493242?ref_src=twsrc%5Etfw">April 20, 2026</a></blockquote>
+                </div>
 
+                <div class="tweet-card">
+                    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">🧑‍🚀 Day 23 of the <a href="https://twitter.com/cursor_ai?ref_src=twsrc%5Etfw">@cursor_ai</a> <a href="https://twitter.com/hashtag/vibejam?src=hash&amp;ref_src=twsrc%5Etfw">#vibejam</a><br><br>Proudly sponsored by <a href="https://twitter.com/cursor_ai?ref_src=twsrc%5Etfw">@cursor_ai</a> + <a href="https://twitter.com/boltdotnew?ref_src=twsrc%5Etfw">@boltdotnew</a> + <a href="https://twitter.com/heyglif?ref_src=twsrc%5Etfw">@heyglif</a> + <a href="https://twitter.com/tripoai?ref_src=twsrc%5Etfw">@tripoai</a><br><br>Prizes to win (submit your vibe coded game before May 1!)<br>🏆 $25,000<br>🥈 $10,000<br>🥉 $5,000<br><br>🚨🚨🚨 ONLY 5 DAYS LEFT! 🤯🤯🤯<br><br>My favorite games from today:<br><br>🌅 Sunset City by… <a href="https://t.co/OJBuAe8Imr">https://t.co/OJBuAe8Imr</a> <a href="https://t.co/tQshYXEO8x">pic.twitter.com/tQshYXEO8x</a></p>&mdash; @levelsio (@levelsio) <a href="https://twitter.com/levelsio/status/2048176274787471385?ref_src=twsrc%5Etfw">April 25, 2026</a></blockquote>
+                </div>
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I couldn’t code 18 months ago.<br><br>Yesterday I raised over $20,000 from initial customers to get my software business off the ground.<br><br>Believe in yourself, be relentlessly resourceful, be relentlessly optimistic, and never give up.</p>&mdash; Mckay Wrigley (@mckaywrigley) <a href="https://twitter.com/mckaywrigley/status/1286663173861408770?ref_src=twsrc%5Etfw">July 24, 2020</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<blockquote class="twitter-tweet"><p lang="zh" dir="ltr">阿里通义实验室最新发布了款ASR：Fun-ASR 1.5，核心能力：方言工业级可用<br><br>单模型即可无缝覆盖30种语言、汉语七大方言体系及20+ 地方口音，古诗词吟诵也能精准转写<br><br>典型方言场景CER相对上代下降56.2%，有5种方言准确率破 90%，15种超过 80%… <a href="https://t.co/1V6B1EPX8l">pic.twitter.com/1V6B1EPX8l</a></p>&mdash; AIGCLINK (@aigclink) <a href="https://twitter.com/aigclink/status/2046149914678493242?ref_src=twsrc%5Etfw">April 20, 2026</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">🧑‍🚀 Day 23 of the <a href="https://twitter.com/cursor_ai?ref_src=twsrc%5Etfw">@cursor_ai</a> <a href="https://twitter.com/hashtag/vibejam?src=hash&amp;ref_src=twsrc%5Etfw">#vibejam</a><br><br>Proudly sponsored by <a href="https://twitter.com/cursor_ai?ref_src=twsrc%5Etfw">@cursor_ai</a> + <a href="https://twitter.com/boltdotnew?ref_src=twsrc%5Etfw">@boltdotnew</a> + <a href="https://twitter.com/heyglif?ref_src=twsrc%5Etfw">@heyglif</a> + <a href="https://twitter.com/tripoai?ref_src=twsrc%5Etfw">@tripoai</a><br><br>Prizes to win (submit your vibe coded game before May 1!)<br>🏆 $25,000<br>🥈 $10,000<br>🥉 $5,000<br><br>🚨🚨🚨 ONLY 5 DAYS LEFT! 🤯🤯🤯<br><br>My favorite games from today:<br><br>🌅 Sunset City by… <a href="https://t.co/OJBuAe8Imr">https://t.co/OJBuAe8Imr</a> <a href="https://t.co/tQshYXEO8x">pic.twitter.com/tQshYXEO8x</a></p>&mdash; @levelsio (@levelsio) <a href="https://twitter.com/levelsio/status/2048176274787471385?ref_src=twsrc%5Etfw">April 25, 2026</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 <!--X帖子标识符-->

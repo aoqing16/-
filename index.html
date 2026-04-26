@@ -1,118 +1,17 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta name="referrer" content="no-referrer">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频列表网格布局</title>
-    <style>
-        /* 基础样式 */
-        body {
-            margin: 0;
-            padding: 20px;
-            background-color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
+<div class="placeholder-box"><!--起始点-->
 
-        /* 网格容器：自适应排列 */
-        .video-grid {
-            display: grid;
-            /* 自动填充列，每列最小宽度 240px */
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px; /* 卡片之间的间距 */
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;bvid=BV1jfofBTEYJ&amp;autoplay=0" scrolling="no"
+            border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
-        /* 单个卡片容器 */
-        .video-card {
-            text-decoration: none; /* 取消链接下划线 */
-            color: #18191c;
-            display: flex;
-            flex-direction: column;
-            transition: opacity 0.2s;
-            width: 100%;
-            height: 100%;
-        }
+    <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;bvid=BV1RnoPBCEH9&amp;autoplay=0" scrolling="no"
+            border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
-        .video-card:hover .image-container img {
-            transform: scale(1.05); /* 鼠标悬停图片微放 */
-        }
+    <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;bvid=BV15k9jBTEKw&amp;autoplay=0" scrolling="no"
+            border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
-        /* 图片容器（比例固定） */
-        .image-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9; /* 强制 16:9 比例 */
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #e3e5e7;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 保证图片铺满不变形 */
-            transition: transform 0.3s ease;
-        }
-
-        /* 图片上的数据遮罩（播放量等） */
-        .stats-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 8px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            color: white;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* 标题样式 */
-        .video-title {
-            margin: 10px 0 6px 0;
-            font-size: 15px;
-            font-weight: 500;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2; /* 最多显示两行 */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            height: 42px; /* 固定高度防止错位 */
-        }
-
-        /* 时间/日期样式 */
-        .video-meta {
-            font-size: 13px;
-            color: #9499a0;
-        }
-    </style>
-</head>
-<body>
-
-<div class="video-grid">
-
-        <a href="https://www.bilibili.com/video/BV1fDosBCEko/?spm_id_from=333.1387.homepage.video_card.click" class="video-card">
-            <div class="image-container">
-                <img src="https://i2.hdslb.com/bfs/archive/bb90b511b581f22c751d208bd6fe238300173209.jpg@672w_378h_1c_!web-home-common-cover">
-                <div class="stats-overlay">
-                </div>
-            </div>
-            <div class="video-title">【速通教程】手机端表格Agent 终于来了！</div>
-        </a>
-    <a href="https://www.bilibili.com/video/BV1fDosBCEko/?spm_id_from=333.1387.homepage.video_card.click"
-       class="video-card">
-            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=116429483414688&bvid=BV1WgdoBME6k&cid=37630248975&p=1&autoplay=0" class="video-card">
-            </iframe>
-            <div class="stats-overlay">
-            </div>
-        <div class="video-title">【速通教程】手机端表格Agent 终于来了！</div>
-    </a>
-
-<!--唯一标识符-->
+    <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;bvid=BV1Vb9gBQE7L&amp;autoplay=0" scrolling="no"
+            border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    <iframe src="//player.bilibili.com/player.html?isOutside=true&amp;bvid=BV1Vb9gBQE7L&amp;autoplay=0" scrolling="no"
+            border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    <!--哔哩哔哩内容标识符-->
 </div>
-
-</body>
-</html>
