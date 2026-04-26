@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容聚合展示</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f4f7;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* 核心：自上而下排列 */
+            gap: 20px; /* 区域间的间距 */
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 通用区域样式 */
+        .content-section {
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            height: auto; /* 核心：高度随内容动态变化 */
+            transition: transform 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-2px);
+        }
+
+        .header {
+            padding: 15px 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header h2 {
+            font-size: 1.25rem;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        /* 占位元素：模拟内容填充 */
+        .placeholder-box {
+            margin-top: 15px;
+            background: #f9f9f9;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px; /* 初始最小高度 */
+            color: #aaa;
+        }
+
+        /* 品牌配色修饰 */
+        #bilibili .header {
+            border-left: 5px solid #fb7299;
+        }
+
+        #bilibili h2 {
+            color: #fb7299;
+        }
+
+        #youtube .header {
+            border-left: 5px solid #ff0000;
+        }
+
+        #youtube h2 {
+            color: #ff0000;
+        }
+
+        #x-platform .header {
+            border-left: 5px solid #0f1419;
+        }
+
+        #x-platform h2 {
+            color: #0f1419;
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+    <section id="bilibili" class="content-section">
+        <div class="header">
+            <h2>哔哩哔哩 (Bilibili)</h2>
+        </div>
+        <div class="content">
+            <p>这里是 Bilibili 的内容区域。高度会随着这里文字或图片的增加而自动向下延伸。</p>
+            <div class="placeholder-box"><!--起始点-->
+<!--哔哩哔哩内容标识符-->
+            </div>
+        </div>
+    </section>
+
+    <section id="youtube" class="content-section">
+        <div class="header">
+            <h2>YouTube</h2>
+        </div>
+        <div class="content">
+            <p>YouTube 区域。采用自然排列，适合放置视频卡片或订阅列表。</p>
+            <div class="placeholder-box">YouTube 视频组件占位<!--起始点-->
+
+<!--YouTube内容标识符-->
+            </div>
+        </div>
+    </section>
+
+    <section id="x-platform" class="content-section">
+        <div class="header">
+            <h2>X (Twitter)</h2>
+        </div>
+        <div class="content">
+            <p>最新的推文信息流。由于设置了高度自适应，当推文增多时，页面会自动变长。</p>
+            <div class="placeholder-box">推文信息流占位
+<blockquote class="twitter-tweet"><p lang="zxx" dir="ltr"><a href="https://t.co/ip9kyn2Trk">https://t.co/ip9kyn2Trk</a></p>&mdash; 歸藏(guizang.ai) (@op7418) <a href="https://twitter.com/op7418/status/2047486546300051478?ref_src=twsrc%5Etfw">April 24, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A thread for my nana banana pro prompts 🧵 <a href="https://t.co/riAcKUtR6T">pic.twitter.com/riAcKUtR6T</a></p>&mdash; 宝玉 (@dotey) <a href="https://twitter.com/dotey/status/1996285439867556304?ref_src=twsrc%5Etfw">December 3, 2025</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="zh" dir="ltr">我的第一本书，终于出版了。<br><br>书名叫「重构个体：AI 时代如何打造个人竞争力」，电子工业出版社。<br><br>我年轻的时候读过的技术书，很多都出自电子工业出版社。没想到有一天，自己写的书也能由他们出版。… <a href="https://t.co/Of91PdhKon">pic.twitter.com/Of91PdhKon</a></p>&mdash; Axton (@AxtonLiu) <a href="https://twitter.com/AxtonLiu/status/2037138223361909084?ref_src=twsrc%5Etfw">March 26, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I couldn’t code 18 months ago.<br><br>Yesterday I raised over $20,000 from initial customers to get my software business off the ground.<br><br>Believe in yourself, be relentlessly resourceful, be relentlessly optimistic, and never give up.</p>&mdash; Mckay Wrigley (@mckaywrigley) <a href="https://twitter.com/mckaywrigley/status/1286663173861408770?ref_src=twsrc%5Etfw">July 24, 2020</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="zh" dir="ltr">阿里通义实验室最新发布了款ASR：Fun-ASR 1.5，核心能力：方言工业级可用<br><br>单模型即可无缝覆盖30种语言、汉语七大方言体系及20+ 地方口音，古诗词吟诵也能精准转写<br><br>典型方言场景CER相对上代下降56.2%，有5种方言准确率破 90%，15种超过 80%… <a href="https://t.co/1V6B1EPX8l">pic.twitter.com/1V6B1EPX8l</a></p>&mdash; AIGCLINK (@aigclink) <a href="https://twitter.com/aigclink/status/2046149914678493242?ref_src=twsrc%5Etfw">April 20, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">🧑‍🚀 Day 23 of the <a href="https://twitter.com/cursor_ai?ref_src=twsrc%5Etfw">@cursor_ai</a> <a href="https://twitter.com/hashtag/vibejam?src=hash&amp;ref_src=twsrc%5Etfw">#vibejam</a><br><br>Proudly sponsored by <a href="https://twitter.com/cursor_ai?ref_src=twsrc%5Etfw">@cursor_ai</a> + <a href="https://twitter.com/boltdotnew?ref_src=twsrc%5Etfw">@boltdotnew</a> + <a href="https://twitter.com/heyglif?ref_src=twsrc%5Etfw">@heyglif</a> + <a href="https://twitter.com/tripoai?ref_src=twsrc%5Etfw">@tripoai</a><br><br>Prizes to win (submit your vibe coded game before May 1!)<br>🏆 $25,000<br>🥈 $10,000<br>🥉 $5,000<br><br>🚨🚨🚨 ONLY 5 DAYS LEFT! 🤯🤯🤯<br><br>My favorite games from today:<br><br>🌅 Sunset City by… <a href="https://t.co/OJBuAe8Imr">https://t.co/OJBuAe8Imr</a> <a href="https://t.co/tQshYXEO8x">pic.twitter.com/tQshYXEO8x</a></p>&mdash; @levelsio (@levelsio) <a href="https://twitter.com/levelsio/status/2048176274787471385?ref_src=twsrc%5Etfw">April 25, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<!--X帖子标识符-->
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
