@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="88216f92-0798-461b-b28a-ac7b83ce626c" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/对照.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/基础网页.html" beforeDir="false" afterPath="$PROJECT_DIR$/基础网页.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/网页查找.html" beforeDir="false" afterPath="$PROJECT_DIR$/网页查找.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1777011462479</updated>
       <workItem from="1777011463485" duration="49278000" />
-      <workItem from="1777170872902" duration="20188000" />
+      <workItem from="1777170872902" duration="23384000" />
     </task>
     <servers />
   </component>
