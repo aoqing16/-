@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容聚合展示</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(180deg, #f7f8fc 0%, #eef1f7 100%);
+            line-height: 1.6;
+            color: #2f3440;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* 核心：自上而下排列 */
+            gap: 24px; /* 区域间的间距 */
+            padding: 28px 20px 36px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        /* 通用区域样式 */
+        .content-section {
+            width: 100%;
+            background: #ffffffcc;
+            backdrop-filter: blur(6px);
+            border-radius: 16px;
+            border: 1px solid #e5e9f2;
+            box-shadow: 0 16px 36px rgba(31, 41, 55, 0.08);
+            overflow: hidden;
+            height: auto; /* 核心：高度随内容动态变化 */
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(31, 41, 55, 0.12);
+        }
+
+        .header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #edf1f7;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .content {
+            padding: 22px 24px 26px;
+        }
+
+        .content p {
+            color: #5b6475;
+            font-size: 0.96rem;
+        }
+
+        /* 占位元素：模拟内容填充 */
+        .placeholder-box {
+            margin-top: 15px;
+            background: #f9f9f9;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px; /* 初始最小高度 */
+            color: #aaa;
+        }
+
+        /* 品牌配色修饰 */
+        #bilibili .header {
+            border-left: 5px solid #fb7299;
+        }
+
+        #bilibili h2 {
+            color: #fb7299;
+        }
+
+        #youtube .header {
+            border-left: 5px solid #ff0000;
+        }
+
+        #youtube h2 {
+            color: #ff0000;
+        }
+
+        #x-platform .header {
+            border-left: 5px solid #0f1419;
+        }
+
+        #x-platform h2 {
+            color: #0f1419;
+        }
+
+        #bilibili .video-grid {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        #bilibili .video-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(251, 114, 153, 0.12);
+            border: 1px solid #f3d9e2;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #bilibili .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 24px rgba(251, 114, 153, 0.18);
+        }
+
+        #bilibili .video-card iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: 0;
+        }
+
+        #bilibili .video-title {
+            padding: 10px 12px;
+            border-top: 1px solid #f3d9e2;
+            font-size: 0.95rem;
+            color: #3b4252;
+            font-weight: 600;
+            line-height: 1.4;
+            background: #fffafb;
+        }
+
+        #youtube .video-grid {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        #youtube .video-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.1);
+            border: 1px solid #f5d7d7;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #youtube .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 24px rgba(255, 0, 0, 0.16);
+        }
+
+        #youtube .video-card iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: 0;
+        }
+
+        #youtube .video-title {
+            padding: 10px 12px;
+            border-top: 1px solid #f5d7d7;
+            font-size: 0.95rem;
+            color: #3b4252;
+            font-weight: 600;
+            line-height: 1.4;
+            background: #fff9f9;
+        }
+
+        #x-platform .tweet-grid {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        #x-platform .tweet-card {
+            background: #fff;
+            border-radius: 14px;
+            border: 1px solid #e6e8eb;
+            box-shadow: 0 8px 20px rgba(15, 20, 25, 0.08);
+            overflow: hidden;
+            padding: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #x-platform .tweet-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 26px rgba(15, 20, 25, 0.12);
+        }
+
+        #x-platform .tweet-card .twitter-tweet {
+            margin: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 18px 12px 26px;
+            }
+
+            .header,
+            .content {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+    <section id="bilibili" class="content-section">
+        <div class="header">
+            <h2>哔哩哔哩 (Bilibili)</h2>
+        </div>
+        <div class="content">
+            <p>这里是 Bilibili 的内容区域。高度会随着这里文字或图片的增加而自动向下延伸。</p>
+            <div class="video-grid"><!--起始点-->
+
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1jfofBTEYJ&autoplay=0"
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">DeepSeek V4很强，但不好用？配上龙虾1个问题要花2块钱～</div>
+                </div>
+
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1RnoPBCEH9&autoplay=0"
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">如何从0到1用AI实现财务智能体</div>
+                </div>
+
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV15k9jBTEKw&autoplay=0"
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">爆肝，耗时一周，原创动画《算界守护者》RO姬的觉醒，动画界又要变天了？</div>
+                </div>
+
+                <div class="video-card">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Vb9gBQE7L&autoplay=0"
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-title">LibTV 优秀AI短片展映</div>
+                </div>
+<!--哔哩哔哩内容标识符-->
+            </div>
+        </div>
+    </section>
+
+    <section id="youtube" class="content-section">
+        <div class="header">
+            <h2>YouTube</h2>
+        </div>
+        <div class="content">
+            <p>YouTube 区域。采用自然排列，适合放置视频卡片或订阅列表。</p>
+            <div class="video-grid"><!--起始点-->
+
+                                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WbErZdXojow"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="video-title">今天我還掉了房貸，開啟0負債人生</div>
+                </div>
+
+                                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/TxWErg5JBpk"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="video-title">上市了，就不得不向华尔街低头吗?</div>
+                </div>
+
+                                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/tNzUUET5opY"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="video-title">破解投資圈「窮人思維模式」</div>
+                </div>
+
+                                <div class="video-card">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/AImaQtuySIA"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="video-title">Deep-Live-Cam 2.7 整合包 | 8G 显存零延时换脸，解压即用免联网。</div>
+                </div>
+<!--YouTube内容标识符-->
+            </div>
+        </div>
+    </section>
+
+    <section id="x-platform" class="content-section">
+        <div class="header">
+            <h2>X (Twitter)</h2>
+        </div>
+        <div class="content">
+            <p>最新的推文信息流。由于设置了高度自适应，当推文增多时，页面会自动变长。</p>
+            <div class="tweet-grid"><!--起始点-->
+<blockquote class="twitter-tweet"><p lang="zh" dir="ltr">小米牛皮！早上申请的中午就到了<br><br>直接给了 329 的赠金，相当于一个月的 Codeplan Pro 会员 <a href="https://t.co/OkpF0crzlu">https://t.co/OkpF0crzlu</a> <a href="https://t.co/Q14kCn1zIn">pic.twitter.com/Q14kCn1zIn</a></p>&mdash; 歸藏(guizang.ai) (@op7418) <a href="https://twitter.com/op7418/status/2049046284615790596?ref_src=twsrc%5Etfw">April 28, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="zh" dir="ltr">转译原推：OpenAI 或将重新定义智能手机；联发科、高通与立讯精密，可能成为其 AI 智能体手机的关键伙伴<br><br>• 最新产业调研显示：<br>OpenAI 正在与联发科（MediaTek）和高通（Qualcomm）合作开发智能手机处理器，立讯精密（Luxshare）则是独家系统共同设计与制造伙伴。该产品预计将在 2028 年进入量产。… <a href="https://t.co/lY7tyEusiV">https://t.co/lY7tyEusiV</a></p>&mdash; 宝玉 (@dotey) <a href="https://twitter.com/dotey/status/2048913545417396516?ref_src=twsrc%5Etfw">April 27, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">京东：<a href="https://t.co/SqHgvD4zxf">https://t.co/SqHgvD4zxf</a></p>&mdash; Axton (@AxtonLiu) <a href="https://twitter.com/AxtonLiu/status/2042030249719058697?ref_src=twsrc%5Etfw">April 9, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">pantheon was a documentary from the future <a href="https://t.co/QI3ZKaJIci">https://t.co/QI3ZKaJIci</a></p>&mdash; Mckay Wrigley (@mckaywrigley) <a href="https://twitter.com/mckaywrigley/status/2041687166074679471?ref_src=twsrc%5Etfw">April 8, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="zh" dir="ltr">HuggingFace：<a href="https://t.co/FyBWdaJlEW">https://t.co/FyBWdaJlEW</a><br>ModelScope：<a href="https://t.co/o0BlCMy8mo">https://t.co/o0BlCMy8mo</a><br>技术报告：<a href="https://t.co/HsfsI5Dysn">https://t.co/HsfsI5Dysn</a> <a href="https://t.co/RdxIBQvnia">pic.twitter.com/RdxIBQvnia</a></p>&mdash; AIGCLINK (@aigclink) <a href="https://twitter.com/aigclink/status/2047540150427894212?ref_src=twsrc%5Etfw">April 24, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">✨ Added the <a href="https://twitter.com/hashtag/vibejam?src=hash&amp;ref_src=twsrc%5Etfw">#vibejam</a> portal to my drone sim and I immediately ended up being teleported to <a href="https://twitter.com/dvassallo?ref_src=twsrc%5Etfw">@dvassallo</a>&#39;s F1 sim <a href="https://t.co/hoIq542oo1">https://t.co/hoIq542oo1</a> <a href="https://t.co/DQuDv9iXCJ">pic.twitter.com/DQuDv9iXCJ</a></p>&mdash; @levelsio (@levelsio) <a href="https://twitter.com/levelsio/status/2048904698208407704?ref_src=twsrc%5Etfw">April 27, 2026</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<!--X帖子标识符-->
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
